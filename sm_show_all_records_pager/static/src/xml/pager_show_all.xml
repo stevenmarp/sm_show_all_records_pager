@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+    <t t-name="sm_show_all_records_pager.Pager" t-inherit="web.Pager" t-inherit-mode="extension" owl="1">
+        <xpath expr="//span[hasclass('btn-group')]" position="after">
+            <span class="d-print-none o_sm_pager_actions">
+                <button t-if="!smIsShowingAll" type="button"
+                        class="btn btn-link btn-sm px-1 o_sm_pager_show_all"
+                        title="Show all records on one page"
+                        tabindex="-1"
+                        t-att-disabled="state.disabled or !smCanShowAll"
+                        t-on-click.stop="smShowAll">Show All</button>
+                <button t-if="smIsShowingAll" type="button"
+                        class="btn btn-link btn-sm px-1 o_sm_pager_reset"
+                        title="Back to the default page size"
+                        tabindex="-1"
+                        t-att-disabled="state.disabled"
+                        t-on-click.stop="smReset">Reset</button>
+            </span>
+        </xpath>
+    </t>
+
+</templates>
