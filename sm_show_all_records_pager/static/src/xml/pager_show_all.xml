@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+    <t t-name="sm_show_all_records_pager.Pager" t-inherit="web.Pager" t-inherit-mode="extension">
+        <xpath expr="//span[hasclass('btn-group')]" position="after">
+            <span class="d-print-none align-self-center o_sm_pager_actions" aria-atomic="true">
+                <button t-if="!isShowingAll" type="button"
+                        class="btn btn-link btn-sm px-1 o_sm_pager_show_all"
+                        data-tooltip="Show all records on one page"
+                        tabindex="-1"
+                        t-att-disabled="state.isDisabled or !canShowAll"
+                        t-on-click.stop="() => this.showAll()">Show All</button>
+                <button t-if="isShowingAll" type="button"
+                        class="btn btn-link btn-sm px-1 o_sm_pager_reset"
+                        data-tooltip="Back to the default page size"
+                        tabindex="-1"
+                        t-att-disabled="state.isDisabled"
+                        t-on-click.stop="() => this.reset()">Reset</button>
+            </span>
+        </xpath>
+    </t>
+
+    <t t-name="sm_show_all_records_pager.X2ManyField" t-inherit="web.X2ManyField" t-inherit-mode="extension">
+        <xpath expr="//div[hasclass('o_cp_pager')]" position="attributes">
+            <attribute name="t-if">props.record.data[props.name].count > props.record.data[props.name].limit or smKeepPager</attribute>
+        </xpath>
+    </t>
+
+</templates>
